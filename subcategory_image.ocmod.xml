@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<code>3619212312057151825913175</code>
+  <name>Subcategory Image</name>
+  <version>1.0</version>
+  <author>Cyber Fox</author>
+  <link>https://cyberfoxdigital.co.uk</link>
+	<file path="catalog/controller/product/category.php">
+		<operation>
+			<search><![CDATA[$data['categories'][] = array(]]></search>
+			<add position="before"><![CDATA[				if ($result['image']) {
+					$image = $this->model_tool_image->resize($result['image'], $this->config->get($this->config->get('config_theme') . '_image_category_width'), $this->config->get($this->config->get('config_theme') . '_image_category_height'));
+				} else {
+					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_category_width'), $this->config->get($this->config->get('config_theme') . '_image_category_height'));
+
+				}]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$data['categories'][] = array(]]></search>
+			<add position="after"><![CDATA[					'image' => $image,]]></add>
+		</operation>
+	</file>
+</modification>
